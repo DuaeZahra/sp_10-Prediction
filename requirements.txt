@@ -1,8 +1,0 @@
-pandas
-numpy
-joblib
-scikit-learn
-hopsworks
-hsml
-requests
-meteostat
