@@ -76,12 +76,11 @@ weather_data = weather_data.rename(columns={"time": "timestamp"})
 
 # Filter and rename relevant weather features
 weather_data = weather_data[[
-    "timestamp", "temp", "dwpt", "rhum", "prcp", "wspd", "pres"
+    "timestamp", "temp", "dwpt", "rhum", "wspd", "pres"
 ]].rename(columns={
     "temp": "Temp",
     "dwpt": "DewPoint",
     "rhum": "RelHumidity",
-    "prcp": "Precip",
     "wspd": "WindSp",
     "pres": "Pres"
 })
@@ -114,10 +113,20 @@ feature_group = fs.get_or_create_feature_group(
     event_time="timestamp"
 )
 
-# Ensure timestamp is in datetime format (if not already)
 df_pollution["timestamp"] = pd.to_datetime(df_pollution["timestamp"])
 df_pollution = df_pollution.sort_values(by='timestamp')
 df_pollution = df_pollution.reset_index(drop=True)
+df_pollution['pm10_log'] = np.log1p(df_pollution['pm10'])
+df_pollution["hour"] = df_pollution["timestamp"].dt.hour
+df_pollution['month'] = df_pollution['timestamp'].dt.month
+df_pollution["dayofweek"] = df_pollution["timestamp"].dt.dayofweek
+df_pollution["is_weekend"] = df_pollution["dayofweek"].isin([5, 6]).astype(int)
+for lag in lags:
+    df_pollution[f"pm10_log_lag{lag}"] = df_pollution["pm10_log"].shift(lag)
+for window in windows:
+    df_pollution[f"pm10_log_rollmean{window}"] = df_pollution["pm10_log"].rolling(window=window).mean()
+clean_df = df_pollution.dropna().reset_index(drop=True)
+clean_df = clean_df.sort_values(by='timestamp')
 
 # Insert the merged data into the feature group
-pollution_fg.insert(df_pollution, write_options={"wait_for_job": True})
+pollution_fg.insert(clean_df, write_options={"wait_for_job": True})
