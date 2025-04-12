@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import hopsworks
 from hsml.schema import Schema
-from hsml.feature_group_api import FeatureGroup
+from hsml.feature_group import FeatureGroup
 from meteostat import Point, Hourly
 import time
 
