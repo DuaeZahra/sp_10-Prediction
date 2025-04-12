@@ -112,7 +112,7 @@ for lag in lags:
 for window in windows:
     df_pollution[f"pm10_log_rollmean{window}"] = df_pollution["pm10_log"].rolling(window=window).mean()
 
-df['pm10_rolling7'] = df['pm10'].rolling(window=7, min_periods=1).mean()
+df_pollution['pm10_rolling7'] = df_pollution['pm10'].rolling(window=7, min_periods=1).mean()
 clean_df = df_pollution.dropna().reset_index(drop=True)
 clean_df = clean_df.sort_values(by='timestamp')
 
