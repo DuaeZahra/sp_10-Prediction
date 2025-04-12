@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import hopsworks
 from hsml.schema import Schema
-from hsml.feature_group import FeatureGroup
+# from hsml.feature_group import FeatureGroup
 from meteostat import Point, Hourly
 import time
 
@@ -94,24 +94,6 @@ df_pollution = pd.merge_asof(
     tolerance=pd.Timedelta("1h")
 )
 
-import os
-
-api_key = "Nlb2ywFqaAR7w07G.j0RReaMnKTpLSSAVhQbzEV9dqSf10BtIc1V2s1An1AUQRcUbk0C5YnNHk1c8Wfip"
-project_name = "AQI_Dua"
-
-os.environ["HOPSWORKS_API_KEY"] = api_key
-
-project = hopsworks.login(api_key_value=os.environ["HOPSWORKS_API_KEY"], project=project_name)
-fs = project.get_feature_store()
-
-# Create or get feature group
-feature_group = fs.get_or_create_feature_group(
-    name="pollution_pm10_features_git",
-    version=1,
-    description="PM10 and weather features hourly",
-    primary_key=["timestamp"],
-    event_time="timestamp"
-)
 
 df_pollution["timestamp"] = pd.to_datetime(df_pollution["timestamp"])
 df_pollution = df_pollution.sort_values(by='timestamp')
@@ -130,6 +112,25 @@ for window in windows:
     df_pollution[f"pm10_log_rollmean{window}"] = df_pollution["pm10_log"].rolling(window=window).mean()
 clean_df = df_pollution.dropna().reset_index(drop=True)
 clean_df = clean_df.sort_values(by='timestamp')
+
+import os
+
+api_key = "Nlb2ywFqaAR7w07G.j0RReaMnKTpLSSAVhQbzEV9dqSf10BtIc1V2s1An1AUQRcUbk0C5YnNHk1c8Wfip"
+project_name = "AQI_Dua"
+
+os.environ["HOPSWORKS_API_KEY"] = api_key
+
+project = hopsworks.login(api_key_value=os.environ["HOPSWORKS_API_KEY"], project=project_name)
+fs = project.get_feature_store()
+
+# Create or get feature group
+feature_group = fs.get_or_create_feature_group(
+    name="pollution_pm10_features_git",
+    version=1,
+    description="PM10 and weather features hourly",
+    primary_key=["timestamp"],
+    event_time="timestamp"
+)
 
 # Insert the merged data into the feature group
 feature_group.insert(clean_df, write_options={"wait_for_job": True})
