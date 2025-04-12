@@ -6,4 +6,3 @@ hopsworks
 hsml
 requests
 meteostat
-hopsworks --upgrade
