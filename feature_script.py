@@ -93,7 +93,7 @@ df_pollution = pd.merge_asof(
     direction="nearest",
     tolerance=pd.Timedelta("1h")
 )
-import hopsworks
+
 import os
 
 api_key = "Nlb2ywFqaAR7w07G.j0RReaMnKTpLSSAVhQbzEV9dqSf10BtIc1V2s1An1AUQRcUbk0C5YnNHk1c8Wfip"
@@ -106,7 +106,7 @@ fs = project.get_feature_store()
 
 # Create or get feature group
 feature_group = fs.get_or_create_feature_group(
-    name="pollution_pm10_features",
+    name="pollution_pm10_features_git",
     version=1,
     description="PM10 and weather features hourly",
     primary_key=["timestamp"],
