@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 from datetime import datetime, timedelta
 import hopsworks
+import numpy as np
 from hsml.schema import Schema
 # from hsml.feature_group import FeatureGroup
 from meteostat import Point, Hourly
