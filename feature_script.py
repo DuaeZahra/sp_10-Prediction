@@ -133,5 +133,5 @@ feature_group = fs.get_or_create_feature_group(
     event_time="timestamp"
 )
 
-# Insert the merged data into the feature group
 feature_group.insert(clean_df, write_options={"wait_for_job": True})
+print("Data inserted successfully.")
