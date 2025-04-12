@@ -121,6 +121,9 @@ df_pollution["hour"] = df_pollution["timestamp"].dt.hour
 df_pollution['month'] = df_pollution['timestamp'].dt.month
 df_pollution["dayofweek"] = df_pollution["timestamp"].dt.dayofweek
 df_pollution["is_weekend"] = df_pollution["dayofweek"].isin([5, 6]).astype(int)
+
+lags = [1, 3, 6, 24]               # in hours
+windows = [3, 6, 12, 24]           # rolling window (hourly basis)
 for lag in lags:
     df_pollution[f"pm10_log_lag{lag}"] = df_pollution["pm10_log"].shift(lag)
 for window in windows:
@@ -129,4 +132,4 @@ clean_df = df_pollution.dropna().reset_index(drop=True)
 clean_df = clean_df.sort_values(by='timestamp')
 
 # Insert the merged data into the feature group
-pollution_fg.insert(clean_df, write_options={"wait_for_job": True})
+feature_group.insert(clean_df, write_options={"wait_for_job": True})
