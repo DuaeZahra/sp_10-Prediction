@@ -17,8 +17,9 @@ os.environ["HOPSWORKS_API_KEY"] = api_key
 project = hopsworks.login(api_key_value=os.environ["HOPSWORKS_API_KEY"])
 fs = project.get_feature_store()
 
-fg = fs.get_feature_group(name="pollution_pm10_features", version=1)
-clean_df = fg.read()
+# fg = fs.get_feature_group(name="pollution_pm10_features", version=1)
+print(fs.get_feature_groups())  # to see available feature groups
+# clean_df = fg.read()
 
 # Drop timestamp as it's not a feature
 clean_df = clean_df.drop(columns=["timestamp"])
