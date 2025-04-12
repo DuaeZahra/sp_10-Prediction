@@ -26,7 +26,7 @@ target = 'pm10_log'
 features = ['pm10_log_rollmean3', 'pm10_log_lag1', 'pm10_log_rollmean6', 'pm2_5',
             'pm10_log_rollmean12', 'pm10_log_lag3', 'co', 'pm10_log_rollmean24',
             'aqi', 'pm10_log_lag24', 'pm10_log_lag6', 'no2', 'pm10_rolling7',
-            'no', 'WindSp', 'Temp', 'Pres', 'o3', 'nh3', 'RelHumidity', 'so2']
+            'no','windsp', 'temp', 'pres', 'relhumidity', 'o3', 'nh3', 'so2']
 split_ratio = 0.8
 split_index = int(len(clean_df) * split_ratio)
 
