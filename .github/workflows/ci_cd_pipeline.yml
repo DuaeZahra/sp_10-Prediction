@@ -26,9 +26,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install "hopsworks[python]"
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install hopsworks[python]
 
       - name: Run feature script (hourly)
         if: github.event.schedule == '0 * * * *'
