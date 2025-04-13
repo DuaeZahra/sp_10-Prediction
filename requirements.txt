@@ -6,3 +6,4 @@ hopsworks
 hsml
 requests
 meteostat
+confluent-kafka
