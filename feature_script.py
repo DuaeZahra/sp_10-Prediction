@@ -123,7 +123,12 @@ project_name = "AQI_Dua"
 
 os.environ["HOPSWORKS_API_KEY"] = api_key
 
-project = hopsworks.login(api_key_value=os.environ["HOPSWORKS_API_KEY"], project=project_name)
+project = hopsworks.login(
+    api_key_value=os.environ["HOPSWORKS_API_KEY"],
+    project=project_name,
+    model_serving=False
+)
+
 fs = project.get_feature_store()
 
 # Create or get feature group
