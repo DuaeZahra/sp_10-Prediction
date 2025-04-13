@@ -2,7 +2,7 @@ pandas
 numpy
 joblib
 scikit-learn
-hopsworks
+hopsworks>=3.0.0
 hsml
 requests
 meteostat
