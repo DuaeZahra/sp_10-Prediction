@@ -130,7 +130,6 @@ project = hopsworks.login(
 )
 
 fs = project.get_feature_store()
-
 # Create or get feature group
 feature_group = fs.get_or_create_feature_group(
     name="pollution_pm10_features_git",
