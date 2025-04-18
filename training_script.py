@@ -59,13 +59,19 @@ print(f"  - R²: {r2:.2f}")
 print(f"  - Accuracy ≈ {accuracy:.2f}%")
 
 # Step 5: Save and register model
-joblib.dump(ridge, 'ridge_model.pkl')
+# joblib.dump(ridge, 'ridge_model.pkl')
+# joblib.dump(scaler, "pm10_model_dscaler.pkl")
+
+joblib.dump(rf_model, "pm10_model_dir/model.pkl")
+joblib.dump(scaler, "pm10_model_dir/scaler.pkl")
 
 model_registry = project.get_model_registry()
 model = model_registry.python.create_model(
     name="pm10_ridge_model",
+    version=12 ,
     metrics={"rmse": rmse, "mae": mae, "r2": r2},
     description="Ridge regression model for PM10 prediction"
 )
 model.save("ridge_model.pkl")
+# model.save("ridge_model.pkl")
 
