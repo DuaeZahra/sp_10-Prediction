@@ -61,16 +61,18 @@ print(f"  - Accuracy ≈ {accuracy:.2f}%")
 
 # Make sure the directory exists
 os.makedirs("pm10_model_dir", exist_ok=True)
-# Now safely dump model and scaler
+
+# Save the model and scaler
 joblib.dump(ridge, "pm10_model_dir/model.pkl")
 joblib.dump(scaler, "pm10_model_dir/scaler.pkl")
 
+# Register the model in Hopsworks
 model_registry = project.get_model_registry()
 model = model_registry.python.create_model(
     name="pm10_ridge_model",
-    version=12 ,
     metrics={"rmse": rmse, "mae": mae, "r2": r2},
     description="Ridge regression model for PM10 prediction"
 )
-model.save("pm10_model_dir") 
 
+# This will automatically use the next available version
+model.save("pm10_model_dir")
