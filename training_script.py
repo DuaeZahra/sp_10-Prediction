@@ -62,7 +62,7 @@ print(f"  - Accuracy ≈ {accuracy:.2f}%")
 # joblib.dump(ridge, 'ridge_model.pkl')
 # joblib.dump(scaler, "pm10_model_dscaler.pkl")
 
-joblib.dump(rf_model, "pm10_model_dir/model.pkl")
+joblib.dump(ridge, "pm10_model_dir/model.pkl")
 joblib.dump(scaler, "pm10_model_dir/scaler.pkl")
 
 model_registry = project.get_model_registry()
