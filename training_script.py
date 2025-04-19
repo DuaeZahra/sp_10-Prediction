@@ -58,10 +58,10 @@ print(f"  - Mean Absolute Error: {mae:.2f}")
 print(f"  - R²: {r2:.2f}")
 print(f"  - Accuracy ≈ {accuracy:.2f}%")
 
-# Step 5: Save and register model
-# joblib.dump(ridge, 'ridge_model.pkl')
-# joblib.dump(scaler, "pm10_model_dscaler.pkl")
 
+# Make sure the directory exists
+os.makedirs("pm10_model_dir", exist_ok=True)
+# Now safely dump model and scaler
 joblib.dump(ridge, "pm10_model_dir/model.pkl")
 joblib.dump(scaler, "pm10_model_dir/scaler.pkl")
 
@@ -72,6 +72,5 @@ model = model_registry.python.create_model(
     metrics={"rmse": rmse, "mae": mae, "r2": r2},
     description="Ridge regression model for PM10 prediction"
 )
-model.save("ridge_model.pkl")
-# model.save("ridge_model.pkl")
+model.save("pm10_model_dir") 
 
