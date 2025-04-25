@@ -1,3 +1,4 @@
+import os
 import hopsworks
 api_key = "Nlb2ywFqaAR7w07G.j0RReaMnKTpLSSAVhQbzEV9dqSf10BtIc1V2s1An1AUQRcUbk0C5YnNHk1c8Wfip"
 project_name = "AQI_Dua"
