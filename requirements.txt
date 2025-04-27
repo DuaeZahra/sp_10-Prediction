@@ -8,3 +8,4 @@ hsml
 requests
 meteostat
 confluent-kafka
+matplotlib
