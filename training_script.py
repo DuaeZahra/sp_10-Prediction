@@ -88,11 +88,12 @@ print(f"  - Mean Squared Error (MSE): {mse:.2f}")
 print(f"  - Root Mean Squared Error (RMSE): {rmse:.2f}")
 print(f"  - R-squared (R2 Score): {r2:.3f}")
 
-
+model_registry = project.get_model_registry()
 # Save the model and scalers separately
 os.makedirs("pm10_model_dir", exist_ok=True)
 
-model.save("pm10_model_dir/model.h5")  # Save in HDF5 format
+model.save("pm10_model_dir/model.keras")
+ 
 
 # Save the scalers
 joblib.dump(scaler_X, "pm10_model_dir/scaler_X.pkl")
