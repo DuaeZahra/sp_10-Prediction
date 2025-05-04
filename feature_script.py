@@ -138,6 +138,7 @@ feature_group = fs.get_or_create_feature_group(
     primary_key=["timestamp"],
     event_time="timestamp"
 )
+clean_df['aqi'] = clean_df['aqi'].astype('int64')
 
 feature_group.insert(clean_df, write_options={"wait_for_job": True})
 print("Data inserted successfully.")
