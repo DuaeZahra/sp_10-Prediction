@@ -6,14 +6,14 @@ A complete machine learning pipeline for forecasting PM10 (particulate matter) a
 **Project Overview**
 This project predicts PM10 levels in Lahore using time-series forecasting techniques. It collects live data, engineers features, trains an LSTM model, and displays predictions through a web app.
 
-** Tech Stack**
+**Tech Stack**
 Languages: Python
 ML Models: LSTM, Random Forest, XGBoost, Ridge
 Libraries: Pandas, NumPy, Scikit-learn, TensorFlow, Matplotlib, Seaborn
 MLOps Tools: Hopsworks Feature Store, GitHub Actions (CI/CD)
 Data Sources: OpenWeatherMap API, Meteostat API
 
-** Features**
+**Features**
 Real-time data fetching from APIs
 Time-series feature engineering (lag, rolling, temporal encodings)
 LSTM model for 3-day PM10 forecast
