@@ -8,7 +8,7 @@ This project predicts PM10 levels in Lahore using time-series forecasting techni
 
 **Tech Stack**
 Languages: Python
-ML Models: LSTM, Random Forest, XGBoost, Ridge
+ML Models: LSTM, Random Forest, XGBoost, Ridge <br>
 Libraries: Pandas, NumPy, Scikit-learn, TensorFlow, Matplotlib, Seaborn
 MLOps Tools: Hopsworks Feature Store, GitHub Actions (CI/CD)
 Data Sources: OpenWeatherMap API, Meteostat API
